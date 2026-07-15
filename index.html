@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jsqr/1.4.0/jsQR.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
 <style>
   :root{
     --bg: #ffffff;
@@ -427,6 +427,11 @@ function closeScanner(){
 }
 
 function scanLoop(video){
+  if(typeof jsQR !== "function"){
+    toast("ماژول اسکن بارگذاری نشد — اتصال اینترنت را بررسی کنید");
+    closeScanner();
+    return;
+  }
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d", {willReadFrequently:true});
   function tick(){
